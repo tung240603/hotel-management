@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { RiGroupFill } from 'react-icons/ri';
 import { MdOutlineSubject } from 'react-icons/md';
 
-
 import './Header.scss';
 import UserMenu from '../../../components/UserMenu/UserMenu';
 
@@ -19,11 +18,11 @@ const TopContent = () => {
                         <div className="contact-list">
                             <span className="contact">
                                 <RiGroupFill className="icon" />
-                                <span>Team 16</span>
+                                <span>Team </span>
                             </span>
                             <span className="contact">
                                 <MdOutlineSubject className="icon" />
-                                <span>Nhập môn Công nghệ phần mềm</span>
+                                <span>Project 1</span>
                             </span>
                         </div>
 

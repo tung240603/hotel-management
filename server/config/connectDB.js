@@ -1,17 +1,11 @@
-const mongoose = require('mongoose');
-require('dotenv').config();
+import mongoose from 'mongoose';
+
 const connectDB = async () => {
     try {
-        await mongoose.connect(
-            `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@hotelmanage.xjfexqv.mongodb.net/?retryWrites=true&w=majority`,
-            {
-                useUnifiedTopology: true,
-            },
-        );
-        console.log('MongoDB connected');
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log(`Successfully connected to mongoDB 👍`);
     } catch (error) {
-        console.log(error);
-        process.exit(1);
+        console.err(`ERROR: ${error.message}`);
     }
 };
 

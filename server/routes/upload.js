@@ -1,5 +1,5 @@
 const express = require('express');
-const { upload } = require('../helpers/FileHelper');
+const { upload } = require('../helpers/FileHelper.js');
 const {
     singleFileUpload,
     multipleFileUpload,
