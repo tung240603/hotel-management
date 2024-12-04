@@ -25,6 +25,9 @@ const MainContent = () => {
                             <Link to="/rooms/1" className="item">
                                 Phòng
                             </Link>
+                            <Link to="/dat-dich-vu" className="item">
+                                Dat dich vu
+                            </Link>
                         </div>
                         <div className="book-now">
                             <Link to="/rooms/1">

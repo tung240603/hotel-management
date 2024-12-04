@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import './Nav.scss';
 //import logo from "./images/LogoHotel1.png"

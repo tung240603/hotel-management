@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const reportByRoomTypeSchema = mongoose.Schema({
     roomType: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'roomtype',
+        ref: 'roomType',
         required: true,
     },
     totalRevenue: {

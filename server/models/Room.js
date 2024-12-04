@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const roomSchema = mongoose.Schema(
+const roomSchema = new mongoose.Schema(
     {
         roomNumber: {
             type: String,
@@ -25,15 +25,13 @@ const roomSchema = mongoose.Schema(
         checkOutDate: {
             type: Date,
         },
-        currentBookings: {
-            type: [
-                {
-                    type: mongoose.Schema.Types.ObjectId,
-                    ref: 'booking',
-                },
-            ],
-            default: [],
-        },
+        currentBookings: [
+            {
+                bookingId: { type: mongoose.Schema.Types.ObjectId, ref: 'booking' },
+                checkInDate: Date,
+                checkOutDate: Date,
+            },
+        ],
         price: {
             type: Number,
             required: true,

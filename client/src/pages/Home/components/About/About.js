@@ -3,8 +3,8 @@ import images from '../../../../assets/images';
 
 function About() {
     return (
-        <div className="home-about-container">
-            <div className="container">
+        <div className="home-about-container ">
+            <div className="container ">
                 <div className="row">
                     <div className="col-12 col-lg-6">
                         <div className="content">
@@ -13,7 +13,7 @@ function About() {
                                 <h2 data-aos="fade-up">
                                     Chào mừng đến với
                                     <br />
-                                    Roberto Hotel Luxury
+                                    Equatorial Hotel
                                 </h2>
                             </div>
 
@@ -47,9 +47,9 @@ function About() {
                         </div>
                     </div>
                     <div className="col-12">
-                        <div className="services">
+                        <div className="services ">
                             <div className="row">
-                                <div className="col-md-2-4 col-6">
+                                <div className="col-md-2-4 col-6 ">
                                     <div className="service" data-aos="fade-up" data-aos-duration="800">
                                         <img src={images.icon1} alt="service-1" />
                                         <h5>Vận chuyển</h5>

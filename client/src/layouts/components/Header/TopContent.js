@@ -18,7 +18,7 @@ const TopContent = () => {
                         <div className="contact-list">
                             <span className="contact">
                                 <RiGroupFill className="icon" />
-                                <span>Team </span>
+                                <span>Team 6</span>
                             </span>
                             <span className="contact">
                                 <MdOutlineSubject className="icon" />

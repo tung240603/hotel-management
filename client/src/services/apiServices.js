@@ -7,8 +7,8 @@ export const postLogin = ({ username, password }) => {
     });
 };
 
-export const postRegister = (userInfor) => {
-    return axios.post('auth/register', userInfor);
+export const postRegister = (userInfo) => {
+    return axios.post('auth/register', userInfo);
 };
 
 export const getAllUsers = () => {
@@ -61,7 +61,7 @@ export const deleteRoom = (id) => {
 
 export const getAllBooking = () => {
     return axios.get('booking/all');
-}
+};
 
 export const putUpdateRoom = (id, data) => {
     return axios.put(`rooms/updateRoom/${id}`, data);
@@ -115,8 +115,15 @@ export const getRule = () => {
     return axios.get('quidinh/get');
 };
 
-export const createReportByMonthYear = (data) => {
-    return axios.get(`report/create/${data.month}/${data.year}`);
+export const createReportByMonthYear = async ({ month, year }) => {
+    try {
+        const response = await axios.post('/api/report', { month, year });
+        console.log('Report created: ', response.data); // Thêm log này để kiểm tra dữ liệu trả về
+        return response;
+    } catch (error) {
+        console.error('Lỗi khi gọi API createReportByMonthYear:', error);
+        throw error;
+    }
 };
 
 export const addFavoriteRoom = (id) => {
@@ -137,8 +144,28 @@ export const checkFavoriteRoom = (id) => {
 
 export const getRoomByType = (type) => {
     return axios.get(`rooms/all/type/name/${type}`);
-}
+};
 
 export const searchRooms = (infor) => {
     return axios.post('rooms/filter/1', infor);
-}
+};
+
+export const setSatatusBooking = (id) => {
+    return axios.put(`/admin/status/${id}`);
+};
+
+export const getAllService = () => {
+    return axios.get('service/all');
+};
+
+export const postService = (userForm) => {
+    return axios.post('service/create', userForm); // Gửi userForm trong body của request
+};
+
+export const deleteService = (RoomID) => {
+    return axios.delete(`service/${RoomID}/delete`);
+};
+
+export const putUpdateBooking = (bookingID, dataBooking) => {
+    return axios.put(`/booking/update/${bookingID}`, dataBooking);
+};

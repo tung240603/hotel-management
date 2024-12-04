@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import FormDichVu from './pages/Admin/Content/DichVu/FormDichVu';
 
 //component
 import Home from './pages/Home/Home';
@@ -29,6 +30,7 @@ import ManageRoomType from './pages/Admin/Content/RoomType/ManageRoomType';
 import AdminBooking from './pages/Admin/Content/Booking/Booking';
 import Regulation from './pages/Admin/Content/Regulation/Regulation';
 import Search from './pages/Search/Search';
+import ManageService from './pages/Admin/Content/DichVu/ManageService';
 
 function App() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -51,6 +53,14 @@ function App() {
                     element={
                         <DefaultLayout>
                             <RoomsScreen />
+                        </DefaultLayout>
+                    }
+                />
+                <Route
+                    path="/dat-dich-vu"
+                    element={
+                        <DefaultLayout>
+                            <FormDichVu />
                         </DefaultLayout>
                     }
                 />
@@ -114,6 +124,9 @@ function App() {
                         <Route path="/admins/manage-room-types" element={<ManageRoomType />} />
                         <Route path="/admins/manage-booking" element={<AdminBooking />} />
                         <Route path="/admins/change-regulations" element={<Regulation />} />
+                        <Route path="/admins/manage-service" element={<ManageService />} />
+
+                        {/* <Route path="/admins/check-out" element={<CheckOutPage />} /> */}
                     </Route>
                 </Route>
 

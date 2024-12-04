@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+// import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = (props) => {
     const formik = useFormik({
@@ -20,10 +21,7 @@ const RegisterForm = (props) => {
                 .matches(/^[a-zA-Z0-9_]{3,}$/, 'Tài khoản không chứa khoảng trắng và ít nhất 3 kí tự'),
             email: Yup.string()
                 .required('Vui lòng điền vào ô này')
-                .matches(
-                    /^[A-Za-z0-9]{1,30}@[a-z0-9]{2,10}(\.[a-z0-9]{2,10}){1,3}$/,
-                    'Vui lòng điền email hợp lệ',
-                ),
+                .matches(/^[A-Za-z0-9]{1,30}@[a-z0-9]{2,10}(\.[a-z0-9]{2,10}){1,3}$/, 'Vui lòng điền email hợp lệ'),
             phone: Yup.string()
                 .required('Vui lòng điền vào ô này')
                 .matches(/^0[0-9]{9}$/, 'Vui lòng điền số điện thoại hợp lệ'),
@@ -39,8 +37,8 @@ const RegisterForm = (props) => {
                 .oneOf([Yup.ref('password'), null], 'Mật khẩu không trùng nhau'),
         }),
 
-        onSubmit: (userInfor) => {
-            props.onRegister(userInfor);
+        onSubmit: (userInfo) => {
+            props.onRegister(userInfo);
         },
     });
 
@@ -69,6 +67,8 @@ const RegisterForm = (props) => {
             e.target.classList.remove('hide-btn');
         }
     }; */
+
+    // const navigate = useNavigate();
 
     return (
         <React.Fragment>
@@ -217,10 +217,10 @@ const RegisterForm = (props) => {
                                                 <button
                                                     type="submit"
                                                     className="btn btn_Register btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
+                                                    // onClick={() => navigate('/login')}
                                                 >
                                                     Đăng kí
                                                 </button>
-
                                             </form>
                                         </div>
                                     </div>

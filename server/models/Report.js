@@ -1,28 +1,32 @@
 import mongoose from 'mongoose';
 
-const ReportSchema = new mongoose.Schema({
-    month: {
-        type: Number,
-        required: true,
-    },
-    year: {
-        type: Number,
-        required: true,
-    },
-    reportByRoomType: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'reportByRoomType',
+const reportSchema = mongoose.Schema(
+    {
+        month: {
+            type: Number,
+            required: true,
         },
-    ],
-    roomUsageDensityReport: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'roomUsageDensityReport',
+        year: {
+            type: Number,
+            required: true,
         },
-    ],
-});
+        totalRevenue: {
+            type: Number,
+            required: true,
+        },
+        details: [
+            {
+                roomType: { type: String, required: true }, // Loại phòng
+                revenue: { type: Number, required: true }, // Doanh thu
+                percentage: { type: String, required: true }, // Tỷ lệ doanh thu
+            },
+        ],
+    },
+    {
+        timestamps: true,
+    },
+);
 
-const Report = mongoose.model('report', ReportSchema);
+const Report = mongoose.model('Report', reportSchema);
 
 export default Report;

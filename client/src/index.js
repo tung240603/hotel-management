@@ -6,6 +6,7 @@ import App from './App';
 import GlobalStyles from './components/GlobalStyles';
 import store from './store/store';
 import 'nprogress/nprogress.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

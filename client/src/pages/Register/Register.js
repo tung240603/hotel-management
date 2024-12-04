@@ -9,12 +9,12 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { postRegister } from '../../services/apiServices';
 
-const Regiter = () => {
+const Register = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
-    const registerHandler = async (userInfor) => {
-        const { userName, name, email, phone, password } = userInfor;
+    const registerHandler = async (userInfo) => {
+        const { userName, name, email, phone, password } = userInfo;
 
         try {
             const res = await postRegister({
@@ -34,7 +34,7 @@ const Regiter = () => {
             if (data.success) {
                 dispatch(authActions.register());
                 toast.success(data.message);
-                navigate('/login');
+                navigate('/');
             } else {
                 toast.error(data.message);
             }
@@ -45,16 +45,18 @@ const Regiter = () => {
 
     return (
         <div className="register-container">
-
             <header className="header">
-                <Link to={"/"} className='hehe'>Trang chủ</Link>
-                <div><span>Bạn đã có tài khoản?</span>
-                    <button onClick={() => navigate('/login')}>Đăng nhập</button></div>
-
+                <Link to={'/'} className="hehe">
+                    Trang chủ
+                </Link>
+                <div>
+                    <span>Bạn đã có tài khoản?</span>
+                    <button onClick={() => navigate('/login')}>Đăng nhập</button>
+                </div>
             </header>
             <RegisterForm onRegister={registerHandler} />
         </div>
     );
 };
 
-export default Regiter;
+export default Register;

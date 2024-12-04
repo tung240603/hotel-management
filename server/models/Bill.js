@@ -10,7 +10,7 @@ const billSchema = mongoose.Schema({
         ref: 'users',
     },
     dateOfPayment: {
-        type: String,
+        type: Date, // Thay đổi kiểu dữ liệu thành Date
         required: true,
     },
     totalAmount: {

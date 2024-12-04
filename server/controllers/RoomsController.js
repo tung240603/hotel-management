@@ -562,6 +562,88 @@ const getRoomsFilter = asyncHandler(async (req, res) => {
     }
 });
 
+// @desc    Check-out a room
+// @route   PUT /api/rooms/checkOut/:bookingId
+// @access  Private/User and Admin
+const checkOutRoom = async (req, res) => {
+    const { bookingId } = req.params;
+
+    try {
+        // Lấy thông tin đặt phòng
+        const booking = await Booking.findById(bookingId).populate('room');
+
+        if (!booking) {
+            res.status(404);
+            throw new Error('Booking not found');
+        }
+
+        // Kiểm tra xem đã check-out chưa
+        if (booking.status === 'checked-out') {
+            res.status(400);
+            throw new Error('Room already checked out');
+        }
+
+        // Lấy thông tin phòng
+        const room = await Rooms.findById(booking.room._id);
+
+        if (!room) {
+            res.status(404);
+            throw new Error('Room not found');
+        }
+
+        // Cập nhật trạng thái phòng
+        room.currentBookings = room.currentBookings.filter((bId) => bId.toString() !== bookingId.toString());
+
+        // Đặt lại ngày checkOutDate và lưu phòng
+        room.checkOutDate = null;
+        await room.save();
+
+        // Tính tổng tiền nếu chưa thanh toán
+        if (booking.status !== 'paid') {
+            const daysBooked = Math.ceil(
+                (new Date(booking.checkOutDate) - new Date(booking.checkInDate)) / (1000 * 60 * 60 * 24),
+            );
+
+            const totalAmount = daysBooked * room.price;
+
+            // Tạo hóa đơn
+            const bill = await Bill.create({
+                booking: booking._id,
+                user: booking.user,
+                dateOfPayment: new Date(),
+                totalAmount,
+                address: req.body.address || 'Unknown',
+            });
+
+            // Cập nhật trạng thái đặt phòng
+            booking.status = 'checked-out';
+            await booking.save();
+
+            res.status(200).json({
+                success: true,
+                message: 'Room checked out successfully',
+                room: room,
+                bill: bill,
+            });
+        } else {
+            // Nếu đã thanh toán, chỉ cần cập nhật trạng thái
+            booking.status = 'checked-out';
+            await booking.save();
+
+            res.status(200).json({
+                success: true,
+                message: 'Room checked out successfully',
+                room: room,
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
 export {
     getAllRooms,
     getAllRoomsWithPagination,
@@ -573,4 +655,5 @@ export {
     updateRoom,
     updateRoomWithBookingDetails,
     deleteRoom,
+    checkOutRoom,
 };

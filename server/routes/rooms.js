@@ -13,6 +13,7 @@ import {
     createRoom,
     updateRoomWithBookingDetails,
     deleteRoom,
+    checkOutRoom,
 } from '../controllers/RoomsController.js';
 
 router.get('/all', getAllRooms);
@@ -32,5 +33,7 @@ router.post('/createRoom', upload.array('images'), createRoom);
 router.put('/updateRoom/:id', upload.array('images'), updateRoomWithBookingDetails);
 
 router.delete('/deleteRoom/:id', deleteRoom);
+
+router.put('/checkOut/:bookingId', checkOutRoom);
 
 export default router;

@@ -1,7 +1,7 @@
 const images = {
-    logo: require('./logo.png'),
+    logo: require('./logoHotel1.jpg'),
     warning: require('./warning.png'),
-    logoLight: require('./logo-light.png'),
+    logoLight: require('./logoHotel1.jpg'),
     defaultUser: require('./user.png'),
     room1: require('./rooms/room1.jpg'),
     room2: require('./rooms/room2.jpg'),

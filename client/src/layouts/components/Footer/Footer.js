@@ -15,14 +15,13 @@ function Footer() {
                                 </Link>
 
                                 {/* <h4>+12 345-678-9999</h4> */}
-                                <h4>Thông tin thành viên nhóm 16</h4>
-                                <span>Huỳnh Minh Quang - 20120557@student.hcmus.edu.vn</span>
-                                <span>Nguyễn Văn Tài - 20120569@student.hcmus.edu.vn</span>
-                                <span>Nguyễn Phú Tân - 20120573@student.hcmus.edu.vn</span>
-                                <span>Trần Anh Thi - 20120583@student.hcmus.edu.vn</span>
-                                <span>Môn học: Nhập môn Công nghệ Phần mềm 20-1</span>
-                                <span>Giáo viên hướng dẫn: ThS. Trần Văn Quý</span>
-                                <span>Trường Đại học Khoa học Tự nhiên TP HCM</span>
+                                <h4>Thông tin thành viên nhóm</h4>
+                                <span>Lê Xuân Phúc - 212602500</span>
+                                <span>Nguyễn Đắc Phúc - 212610442</span>
+                                <span>Trịnh Quang Dương - 212640397</span>
+                                <span>Trịnh Đức Lương - 212612929</span>
+                                <span>Hoàng Đình Tùng - 212631446</span>
+                                <span>Trường Đại Giao Thông Vận Tải</span>
                             </div>
                         </div>
 
@@ -72,7 +71,7 @@ function Footer() {
                     <div className="row align-items-center">
                         <div className="col-12 col-md-8">
                             <div className="copywrite-text">
-                                <p>Copyright &copy; 2022 All rights reserved | This website is made by team 16</p>
+                                <p>Copyright &copy; 2024 All rights reserved | This website is made by my team</p>
                             </div>
                         </div>
                         <div className="col-12 col-md-4">

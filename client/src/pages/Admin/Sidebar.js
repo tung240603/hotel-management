@@ -55,6 +55,14 @@ function Sidebar({ collapsed }) {
                             >
                                 Thay đổi Quy định
                             </NavLink>
+                        </MenuItem>{' '}
+                        <MenuItem>
+                            <NavLink
+                                className={({ isActive }) => (isActive ? 'active' : undefined)}
+                                to="/admins/manage-service"
+                            >
+                                Quản lý dịch vụ
+                            </NavLink>
                         </MenuItem>
                     </SubMenu>
                 </Menu>
@@ -62,7 +70,7 @@ function Sidebar({ collapsed }) {
             <SidebarFooter style={{ textAlign: 'center' }}>
                 <div className="sidebar-btn-wrapper">
                     <a
-                        href="https://github.com/CNPM-2022/HotelManager"
+                        href="https://github.com/tung240603/hotel-management"
                         target="_blank"
                         className="sidebar-btn"
                         rel="noopener noreferrer"
