@@ -19,20 +19,20 @@ function Booking() {
 
         if (res && res.data && res.data.success === true) {
             const data = res.data.bills
-                .filter((bill) => bill.booking !== null)
+                .filter((bill) => bill.booking !== null) // Lọc các hóa đơn có giá trị booking.
                 .map((bill) => {
-                    bill.user.name = bill.user.Name;
+                    bill.user.name = bill.user.Name; // Đồng nhất tên thuộc tính.
                     return {
-                        ...bill,
-                        ...bill.booking,
-                        totalAmount: +bill.totalAmount,
-                        customer: bill.user.isAdmin === true ? bill.booking.customerList[0] : bill.user,
+                        ...bill, // Giữ nguyên các thuộc tính hóa đơn gốc.
+                        ...bill.booking, // Gộp các thuộc tính của booking vào hóa đơn.
+                        totalAmount: +bill.totalAmount, // Chuyển `totalAmount` thành số.
+                        customer: bill.user.isAdmin === true ? bill.booking.customerList[0] : bill.user, // Nếu là admin, lấy khách hàng đầu tiên. Nếu không, lấy thông tin người dùng.
                         roomNumber: bill?.booking?.room?.roomNumber ? bill.booking.room.roomNumber : 999,
                         roomPrice: bill?.booking?.room?.price ? bill.booking.room.price : 100000,
                     };
                 });
 
-            setListBills(data);
+            setListBills(data); // Cập nhật danh sách hóa đơn.
         }
     };
 

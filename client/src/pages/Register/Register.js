@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { authActions } from '../../store/authSlice';
 import './Register.scss';
 
-//import toast
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { postRegister } from '../../services/apiServices';
@@ -15,38 +14,40 @@ const Register = () => {
 
     const registerHandler = async (userInfo) => {
         const { userName, name, email, phone, password } = userInfo;
+        const payload = {
+            username: userName,
+            email: email,
+            Name: name,
+            phoneNumber: phone,
+            password,
+        };
 
         try {
-            const res = await postRegister({
-                username: userName,
-                email: email,
-                Name: name,
-                phoneNumber: phone,
-                password,
-            });
-
+            const res = await postRegister(payload);
             const data = res.data;
 
-            if (res.status !== 200) {
-                throw new Error(res.message || 'Something went wrong');
+            if (!data || !data.success) {
+                throw new Error(data.message || 'Unexpected error occurred');
             }
 
-            if (data.success) {
-                dispatch(authActions.register());
-                toast.success(data.message);
-                navigate('/');
-            } else {
-                toast.error(data.message);
-            }
+            dispatch(
+                authActions.register({
+                    token: data.accessToken,
+                    user: data.user,
+                }),
+            );
+
+            toast.success(data.message || 'Registration successful!');
+            navigate('/');
         } catch (err) {
-            toast.error(err.message);
+            toast.error(err.message || 'Registration failed. Please try again.');
         }
     };
 
     return (
         <div className="register-container">
             <header className="header">
-                <Link to={'/'} className="hehe">
+                <Link to="/" className="hehe">
                     Trang chủ
                 </Link>
                 <div>

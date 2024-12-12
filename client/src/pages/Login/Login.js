@@ -42,7 +42,9 @@ const Login = () => {
     return (
         <div className="login-container">
             <header className="header">
-                <Link to={"/"} className='hehe'>Trang chủ</Link>
+                <Link to={'/'} className="hehe">
+                    Trang chủ
+                </Link>
                 <div>
                     <span>Bạn chưa có tài khoản?</span>
                     <button className="btn-signup" onClick={() => navigate('/register')}>

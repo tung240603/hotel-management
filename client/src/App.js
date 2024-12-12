@@ -31,6 +31,7 @@ import AdminBooking from './pages/Admin/Content/Booking/Booking';
 import Regulation from './pages/Admin/Content/Regulation/Regulation';
 import Search from './pages/Search/Search';
 import ManageService from './pages/Admin/Content/DichVu/ManageService';
+import PaymentSuccess from './components/Payment/PaymentSuccess';
 
 function App() {
     const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -129,6 +130,15 @@ function App() {
                         {/* <Route path="/admins/check-out" element={<CheckOutPage />} /> */}
                     </Route>
                 </Route>
+
+                <Route
+                    path="/payment-success"
+                    element={
+                        <DefaultLayout>
+                            <PaymentSuccess />
+                        </DefaultLayout>
+                    }
+                />
 
                 <Route path="*" element={<NotFound />} />
             </Routes>

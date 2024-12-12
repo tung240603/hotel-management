@@ -1,0 +1,137 @@
+/* Tổng thể khung chat */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    max-height: 600px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    position: fixed;
+    bottom: 30px; /* Khoảng cách từ dưới */
+    left: 20px; /* Di chuyển sang bên trái */
+    background-color: white;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Header của khung chat */
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+}
+
+.chat-header h3 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.chat-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Phần tin nhắn */
+.chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+.chat-bot-message {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin: 10px;
+    align-self: flex-start;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.chat-user-message {
+    background-color: #f1f1f1;
+    color: #333;
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin: 10px;
+    align-self: flex-end;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+/* Phần nhập liệu */
+.chat-input-container {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    background: #fff;
+}
+
+.chat-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+}
+
+.chat-send-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.chat-send-button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 8px 12px; /* Điều chỉnh padding để làm nút nhỏ hơn */
+    border-radius: 5px; /* Đổi sang hình chữ nhật với góc bo nhẹ */
+    cursor: pointer;
+    margin-left: 10px;
+    font-size: 14px; /* Điều chỉnh kích thước font */
+}
+
+.chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+}
+
+.chat-header-buttons {
+    display: flex;
+    align-items: center; /* Căn giữa các nút */
+}
+
+.chat-minimize-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 14px; /* Thu nhỏ kích thước font */
+    cursor: pointer;
+    margin-right: -5px; /* Khoảng cách giữa nút thu nhỏ và nút đóng */
+}
+
+.chat-close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px; /* Kích thước font cho nút đóng */
+    cursor: pointer;
+}

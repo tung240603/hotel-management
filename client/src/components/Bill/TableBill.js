@@ -5,7 +5,7 @@ import ReactPaginate from 'react-paginate';
 import FormatPrice from '../FormatPrice/FormatPrice';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { FaSort } from 'react-icons/fa';
-
+import { setSatatusBooking } from '../../services/apiServices';
 function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView }) {
     const ITEMS_PER_PAGE = 6;
 
@@ -41,7 +41,7 @@ function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView })
 
     const handleStatusUpdate = async (billId, index) => {
         try {
-            const response = await axios.put(`/admin/status/${billId}`);
+            const response = await setSatatusBooking(`${billId}`);
             if (response.status === 200) {
                 // Cập nhật trạng thái tại vị trí cụ thể trong danh sách
                 setChunkedBills((prev) =>
@@ -115,9 +115,9 @@ function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView })
                         <th scope="col">Số Ngày Thuê</th>
                         <th scope="col">Đơn Giá</th>
                         <th scope="col">Thành Tiền</th>
-                        <th scope="col">Trạng thái</th>
+                        {/* <th scope="col">Trạng thái</th> */}
                         <th scope="col">Hành động</th>
-                        <th scope="col">Thanh Toán</th>
+                        {/* <th scope="col">Thanh Toán</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -134,13 +134,13 @@ function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView })
                                 <td>
                                     <FormatPrice>{bill.totalAmount}</FormatPrice>
                                 </td>
-                                <td>{bill.status}</td>
+                                {/* <td>{bill.status}</td> */}
                                 <td>
                                     <button className="btn btn-success" onClick={() => handleClickViewButton(bill)}>
                                         Xem chi tiết
                                     </button>
                                 </td>
-                                <td>
+                                {/* <td>
                                     <button
                                         type="button"
                                         className={`btn ${bill.status === 'Paid' ? 'btn-success' : 'btn-warning'}`}
@@ -149,7 +149,7 @@ function TableBill({ role, listBills, setIsShowModalViewBill, setDataBillView })
                                     >
                                         {bill.status === 'Paid' ? 'Đã thanh toán' : 'Chưa thanh toán'}
                                     </button>
-                                </td>
+                                </td> */}
                             </tr>
                         ))
                     ) : (

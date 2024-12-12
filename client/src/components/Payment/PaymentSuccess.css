@@ -1,0 +1,48 @@
+.payment-success-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+.status-box {
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 20px;
+    display: inline-block;
+    margin: 20px auto;
+    text-align: left;
+    width: 80%;
+    max-width: 500px;
+    background-color: #f9f9f9;
+}
+
+.status-box.success {
+    border-color: #28a745;
+    color: #28a745;
+}
+
+.status-box.failed {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+button.back-btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #ffffff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    display: block;
+}
+
+button.back-btn:hover {
+    background-color: #0056b3;
+}

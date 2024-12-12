@@ -28,8 +28,10 @@ const authSlice = createSlice({
             state.token = actions.payload.token;
             state.user = actions.payload.user;
         },
-        register(state) {
+        register(state, actions) {
             state.isAuthenticated = true;
+            state.token = actions.payload.token;
+            state.user = actions.payload.user;
         },
         logout(state) {
             state.isAuthenticated = false;

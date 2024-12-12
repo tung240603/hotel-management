@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useMemo, useReducer, useState } from 'react';
 import Select from 'react-select';
 import _ from 'lodash';

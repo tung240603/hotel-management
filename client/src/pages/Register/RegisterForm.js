@@ -1,7 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-// import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = (props) => {
     const formik = useFormik({
@@ -67,8 +66,6 @@ const RegisterForm = (props) => {
             e.target.classList.remove('hide-btn');
         }
     }; */
-
-    // const navigate = useNavigate();
 
     return (
         <React.Fragment>
@@ -217,7 +214,6 @@ const RegisterForm = (props) => {
                                                 <button
                                                     type="submit"
                                                     className="btn btn_Register btn-outline-warning btn-block text-uppercase mb-2 rounded-pill shadow-sm"
-                                                    // onClick={() => navigate('/login')}
                                                 >
                                                     Đăng kí
                                                 </button>

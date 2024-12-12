@@ -26,7 +26,7 @@ const MainContent = () => {
                                 Phòng
                             </Link>
                             <Link to="/dat-dich-vu" className="item">
-                                Dat dich vu
+                                Đặt dịch vụ
                             </Link>
                         </div>
                         <div className="book-now">

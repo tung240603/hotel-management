@@ -6,7 +6,6 @@ const accessKey = 'F8BBA842ECF85';
 const secretKey = 'K951B6PE1waDMi640xX08PD3vg6EkVlz';
 const ipnUrl = 'http://localhost:5000/api/payment/databack';
 const redirectUrl = 'http://localhost:5000/api/payment/create';
-
 export const ipnapi = async (req, res) => {
     try {
         const {
@@ -42,6 +41,7 @@ export const ipnapi = async (req, res) => {
         if (resultCode === '0') {
             console.log('[IPN API] Payment successful for orderId:', orderId);
 
+            // Tìm và cập nhật trạng thái booking thành "Paid"
             const updatedBooking = await Booking.findOneAndUpdate({ _id: orderId }, { status: 'Paid' }, { new: true });
 
             if (!updatedBooking) {
@@ -50,7 +50,7 @@ export const ipnapi = async (req, res) => {
             }
 
             console.log('[IPN API] Booking updated:', updatedBooking);
-
+            // await updatedBooking.save();
             return res.status(200).json({
                 message: 'Payment successful',
                 booking: updatedBooking,
@@ -168,9 +168,12 @@ export const handlePaymentCallback = async (req, res) => {
             signature,
         } = req.query;
 
-        const rawSignature = `accessKey=${accessKey}&amount=${amount}&extraData=${extraData}&ipnUrl=${ipnUrl}&orderId=${orderId}&orderInfo=${orderInfo}&partnerCode=${partnerCode}&redirectUrl=${redirectUrl}&requestId=${requestId}&requestType=payWithMethod`;
+        // Kiểm tra orderId và signature
+        console.log('[Payment Callback] orderId:', orderId);
+        console.log('[Payment Callback] resultCode:', resultCode);
+        console.log('[Payment Callback] message:', message);
 
-        console.log('[Payment Callback] Raw signature string:', rawSignature);
+        const rawSignature = `accessKey=${accessKey}&amount=${amount}&extraData=${extraData}&ipnUrl=${ipnUrl}&orderId=${orderId}&orderInfo=${orderInfo}&partnerCode=${partnerCode}&redirectUrl=${redirectUrl}&requestId=${requestId}&requestType=payWithMethod`;
 
         const generatedSignature = crypto.createHmac('sha256', secretKey).update(rawSignature).digest('hex');
 
@@ -182,9 +185,11 @@ export const handlePaymentCallback = async (req, res) => {
             return res.status(400).json({ message: 'Invalid signature' });
         }
 
+        // Nếu thanh toán thành công, cập nhật trạng thái booking thành "Paid"
         if (resultCode === '0') {
             console.log('[Payment Callback] Payment successful for orderId:', orderId);
 
+            // Tìm và cập nhật trạng thái booking thành "Paid"
             const updatedBooking = await Booking.findOneAndUpdate({ _id: orderId }, { status: 'Paid' }, { new: true });
 
             if (!updatedBooking) {
@@ -193,7 +198,7 @@ export const handlePaymentCallback = async (req, res) => {
             }
 
             console.log('[Payment Callback] Booking updated:', updatedBooking);
-
+            // await updatedBooking.save();
             return res.status(200).json({
                 message: 'Payment successful',
                 booking: updatedBooking,
@@ -205,5 +210,18 @@ export const handlePaymentCallback = async (req, res) => {
     } catch (error) {
         console.error('[Payment Callback] Error:', error);
         return res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+export const paymentSuccess = async (req, res) => {
+    const { roomNumber } = req.params;
+    try {
+        const booking = await Booking.findOne({ roomNumber });
+        if (!booking) {
+            return res.status(404).json({ message: 'Room not found' });
+        }
+        res.json({ roomNumber: booking.roomNumber, status: booking.status });
+    } catch (error) {
+        res.status(500).json({ message: 'Error fetching room status', error });
     }
 };

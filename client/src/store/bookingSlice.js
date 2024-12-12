@@ -1,9 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialBookingState = { maxPeopel: 0, totalCost: 0, price: 0, roomNumber: 0, owner: [], bookingInformation: {} };
+const initialBookingState = {
+    maxPeopel: 0,
+    totalCost: 0,
+    price: 0,
+    roomNumber: 0,
+    owner: [],
+    bookingInformation: {},
+    status: '',
+};
 
 const bookingSlice = createSlice({
-    name: "booking",
+    name: 'booking',
     initialState: initialBookingState,
     reducers: {
         setMaxPeople(state, action) {
@@ -16,15 +24,21 @@ const bookingSlice = createSlice({
             state.bookingInformation = action.payload.bookingInformation;
         },
         setTotalCost(state, action) {
-            state.totalCost = action.payload.totalCost
+            state.totalCost = action.payload.totalCost;
         },
         setPrice(state, action) {
-            state.price = action.payload.price
+            state.price = action.payload.price;
         },
         setRoomNumber(state, action) {
-            state.roomNumber = action.payload.roomNumber
-        }
+            state.roomNumber = action.payload.roomNumber;
+        },
+        setStatus(state, action) {
+            // Kiểm tra action.payload.status có tồn tại và có giá trị hợp lệ hay không
+            if (action.payload && typeof action.payload.status === 'string') {
+                state.status = action.payload.status;
+            }
+        },
     },
 });
 
-export default bookingSlice
+export default bookingSlice;

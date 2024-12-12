@@ -7,10 +7,6 @@ export const postLogin = ({ username, password }) => {
     });
 };
 
-export const postRegister = (userInfo) => {
-    return axios.post('auth/register', userInfo);
-};
-
 export const getAllUsers = () => {
     return axios.get('user/all');
 };
@@ -168,4 +164,8 @@ export const deleteService = (RoomID) => {
 
 export const putUpdateBooking = (bookingID, dataBooking) => {
     return axios.put(`/booking/update/${bookingID}`, dataBooking);
+};
+
+export const postRegister = (userInfo) => {
+    return axios.post('auth/register', userInfo);
 };

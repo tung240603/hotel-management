@@ -197,12 +197,13 @@ const addUser = asyncHandler(async (req, res) => {
         throw new Error('Please fill all the fields');
     }
     try {
-        const username_db = await User.findOne({ username });
-        if (username_db) {
+        const email_db = await User.findOne({ email });
+        if (email_db) {
             res.status(400);
             throw new Error('User already exists');
         }
-        const hashedPassword = await argon2.hash(password);
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
         const newUser = new User({
             username: username,
             email,
@@ -215,8 +216,10 @@ const addUser = asyncHandler(async (req, res) => {
             typeUser,
         });
         const user = await newUser.save();
+        createToken(res, newUser._id);
+
         if (user) {
-            res.status(200).json({ success: true, message: 'User created successfully', user });
+            res.status(201).json({ success: true, message: 'User created successfully', user });
         } else {
             res.status(400);
             throw new Error('Invalid user data');

@@ -254,7 +254,7 @@ const getBookingsByUserId = async (req, res) => {
 //@access Private
 
 const updateBooking = async (req, res) => {
-    const { roomId, checkInDate, checkOutDate, customerList, totalAmount } = req.body;
+    const { roomId, checkInDate, checkOutDate, customerList, totalAmount, status } = req.body;
     if (!roomId || !checkInDate || !checkOutDate || !customerList || !totalAmount) {
         return res.status(400).json({
             success: false,
@@ -281,6 +281,7 @@ const updateBooking = async (req, res) => {
             booking.checkInDate = checkInDate;
             booking.checkOutDate = checkOutDate;
             booking.totalAmount = totalAmount;
+            booking.status = status;
         }
 
         const updatedBooking = await booking.save();
@@ -354,32 +355,39 @@ const deleteBooking = async (req, res) => {
 
 const setSatatusBooking = async (req, res) => {
     const { status } = req.body;
+
+    // Validate input
     if (!status) {
         return res.status(400).json({
             success: false,
-            message: 'All fields are required',
+            message: 'Status field is required',
         });
     }
+
     try {
+        // Check if the booking exists
         const booking = await Booking.findById(req.params.id);
-        if (booking) {
-            booking.status = status;
-        }
-        const updatedBooking = await booking.save();
-        if (updatedBooking) {
-            return res.status(200).json({
-                success: true,
-                message: 'Booking updated successfully',
-                updatedBooking,
-            });
-        } else {
-            return res.status(400).json({
+        if (!booking) {
+            return res.status(404).json({
                 success: false,
-                message: 'Booking not updated',
+                message: 'Booking not found',
             });
         }
+
+        // Update the booking's status
+        booking.status = status;
+
+        // Save the updated booking
+        const updatedBooking = await booking.save();
+
+        return res.status(200).json({
+            success: true,
+            message: 'Booking status updated successfully',
+            updatedBooking,
+        });
     } catch (error) {
-        res.status(500).json({
+        console.error('Error updating booking status:', error);
+        return res.status(500).json({
             success: false,
             message: 'Internal server error',
         });
